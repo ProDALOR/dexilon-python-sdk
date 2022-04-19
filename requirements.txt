@@ -1,0 +1,5 @@
+pydantic
+requests
+web3
+eth-keys
+eth-account
