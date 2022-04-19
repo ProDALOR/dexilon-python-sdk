@@ -46,3 +46,15 @@ class OrdersBySymbols(BaseModel):
 
     symbol: str
     orders: List[OrderInfo]
+
+
+class FullOrderInfo(BaseModel):
+    symbol: str
+    orderId: str
+    price: float
+    amount: float
+    filledAmount: float
+    avgPrice: float
+    type: str
+    side: str
+    status: str

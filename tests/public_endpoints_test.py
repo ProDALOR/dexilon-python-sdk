@@ -6,7 +6,8 @@ class TestGetAllSymbols:
     TEST_PRIVATE_KEY = '87d25c8ade8c4bb32be098bb35cd594fd1c0511c4423bf36f006f4ecd27f017c'
 
     def setup(self):
-        self.test_instance = DexilonClient(self.TEST_METAMASK_ADDRESS, self.TEST_PRIVATE_KEY)
+        self.test_instance = DexilonClient(
+            self.TEST_METAMASK_ADDRESS, self.TEST_PRIVATE_KEY)
 
     def test_get_all_symbols(self):
         all_symbols = self.test_instance.get_all_symbols()

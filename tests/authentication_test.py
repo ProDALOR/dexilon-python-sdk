@@ -12,7 +12,9 @@ class TestAuthentication:
     def test_should_authenticate(self):
         self.test_instance.authenticate()
 
-    def test_should_reauthenticate_on_request_if_token_expired(self):
+    def test_should_reauthenticate_on_get_margin_request_if_token_expired(self):
         self.test_instance.authenticate()
+        FAKE_JWT_KEY = 'CHANGED_JWT_KEY'
+        self.test_instance.headers['Authorization'] = 'Bearer + ' + FAKE_JWT_KEY
         margin = self.test_instance.get_margin()
         assert margin is not None

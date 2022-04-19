@@ -6,24 +6,27 @@ class TestTradingIntegration:
     TEST_PRIVATE_KEY = '87d25c8ade8c4bb32be098bb35cd594fd1c0511c4423bf36f006f4ecd27f017c'
 
     def setup(self):
-        self.test_instance = DexilonClient(self.TEST_METAMASK_ADDRESS, self.TEST_PRIVATE_KEY)
+        self.test_instance = DexilonClient(
+            self.TEST_METAMASK_ADDRESS, self.TEST_PRIVATE_KEY)
         self.test_instance.authenticate()
 
     def test_create_market_order(self):
-        order_id = self.test_instance.market_order('TEST_MARKET_ORDER_1', 'eth_usdc', 'BUY', 0.10)
+        order_id = self.test_instance.market_order(
+            'TEST_MARKET_ORDER_1', 'eth_usdc', 'BUY', 0.10)
         assert len(order_id) > 0
 
     def test_create_limit_order(self):
-        order_id = self.test_instance.limit_order('TEST_MARKET_ORDER_2', 'eth_usdc', 'BUY', 3200.0, 0.1)
+        order_id = self.test_instance.limit_order(
+            'TEST_MARKET_ORDER_2', 'eth_usdc', 'BUY', 3200.0, 0.1)
         assert len(order_id) > 0
 
-    def test_should_cancel_all_orders(self):
-        result = self.test_instance.cancel_all_orders()
-        assert result
+    def test_should_get_all_open_orders(self):
+        open_orders = self.test_instance.get_open_orders()
+        assert len(open_orders) > 0
 
-    def test_should_cancel_order(self):
-        result = self.test_instance.cancel_order('TESTORDERID', 'eth_usdc')
-        assert result
+    def test_should_get_order_info(self):
+        order_info = self.test_instance.get_order_info('TESTORDERID')
+        assert order_info is not None
 
     def test_should_get_margin(self):
         margin_data = self.test_instance.get_margin()

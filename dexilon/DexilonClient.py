@@ -2,7 +2,7 @@ from typing import List
 
 from .DexilonClientBase import DexilonClientBase
 
-from .responses import AvailableSymbol, OrderBookInfo, MarginData, OrderInfo, OrdersBySymbols
+from .responses import AvailableSymbol, OrderBookInfo, MarginData, OrderInfo, OrdersBySymbols, FullOrderInfo
 
 
 class DexilonClient(DexilonClientBase):
@@ -33,15 +33,20 @@ class DexilonClient(DexilonClientBase):
         return self._request('GET', '/margin', model=MarginData)
 
     # TODO
-    def get_order_info(self, order_id: str) -> OrderInfo:
+    def get_order_info(self, order_id: str, symbol: str) -> FullOrderInfo:
         """
         Returns order information by orderId
         :param order_id: Dexilon order id
         :type order_id: str
-        :return: OrderInfo
+        :param symbol: order symbol
+        :type symbol: str
+        :return: FullOrderInfo
         """
 
-        pass
+        return self._request('GET', '/margin', model=FullOrderInfo, params={
+            'symbol': symbol,
+            'orderId': order_id
+        })
 
     # TODO
     def get_open_orders(self):
