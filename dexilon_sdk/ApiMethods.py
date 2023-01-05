@@ -3,7 +3,7 @@ from typing import List, Union, Awaitable
 from .BaseSession import BaseSession
 
 from .responses import SymbolStats, ServerTime, ExchangeInformation, JWTTokenResponse, \
-    AllOpenOrders, AccountInfo, OrderBookInfo, LeverageEvent, OrderEvent
+    AllOpenOrders, AccountInfo, OrderBookInfo, LeverageEvent, OrderEvent, SymbolRule
 
 
 def auth(func):
@@ -26,6 +26,9 @@ class ApiMethods:
 
     def get_all_symbols(self) -> Union[List[SymbolStats], Awaitable[List[SymbolStats]]]:
         return self.api.request('GET', '/symbols', model=List[SymbolStats])
+
+    def get_symbol_rules(self) -> Union[List[SymbolRule], Awaitable[List[SymbolRule]]]:
+        return self.api.request('GET', '/tradingRules/symbol', model=List[SymbolRule])
 
     def get_server_time(self) -> Union[ServerTime, Awaitable[ServerTime]]:
         return self.api.request('GET', '/system/time', model=ServerTime)

@@ -135,3 +135,13 @@ class AccountInfo(BaseModel):
 
 class LeverageEvent(BaseModel):
     leverage: int
+
+
+class SymbolRule(BaseModel):
+    symbol: str
+    limitOrderBuyPriceCap: float
+    limitOrderSellPriceCap: float
+    minTradeAmount: float
+    minOrderAmount: float
+    maxMarketNotionalOrder: float
+    minOrderNotionalValue: float
