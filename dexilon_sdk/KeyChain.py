@@ -79,6 +79,13 @@ class KeyChain:
             'CosmosAddress': self.cosmos_address
         }
 
+    @property
+    def websocket_params(self) -> dict:
+        return {
+            'token': self.__access_token,
+            'metamaskaddress': self.cosmos_address
+        }
+
     def sign(self, msg: str) -> str:
         return w3.eth.account.sign_message(
             encode_defunct(
