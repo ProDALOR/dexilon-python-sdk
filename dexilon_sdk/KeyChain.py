@@ -83,7 +83,7 @@ class KeyChain:
     def websocket_params(self) -> dict:
         return {
             'token': self.__access_token,
-            'metamaskaddress': self.cosmos_address
+            'cosmosAddress': self.cosmos_address
         }
 
     def sign(self, msg: str) -> str:
