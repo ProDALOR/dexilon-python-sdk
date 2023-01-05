@@ -1,7 +1,7 @@
 from typing import Dict, Optional, Callable
 import json
 
-from pydantic import BaseModel, parse_obj_as
+from pydantic import BaseModel, parse_obj_as, ValidationError
 
 from .BaseSession import BaseSession
 from .ApiMethods import ApiMethods
@@ -85,7 +85,12 @@ class BaseClient(ApiMethods, ChainMethods):
             raise DexilonAPIException.from_dict(data)
 
         if model:
-            return parse_obj_as(model, data)
+            try:
+                return parse_obj_as(model, data)
+            except ValidationError:
+                raise DexilonRequestException(
+                    message=f'Invalid model for api response: {text}'
+                )
 
         return data
 
@@ -106,7 +111,12 @@ class BaseClient(ApiMethods, ChainMethods):
             raise DexilonChainException.from_dict(data)
 
         if model:
-            return parse_obj_as(model, data)
+            try:
+                return parse_obj_as(model, data)
+            except ValidationError:
+                raise DexilonRequestException(
+                    message=f'Invalid model for chain response: {text}'
+                )
 
         return data
 

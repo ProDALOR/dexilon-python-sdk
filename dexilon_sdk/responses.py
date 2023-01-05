@@ -49,14 +49,16 @@ class ExchangeInformation(ServerTime):
 
 
 class OrderInfo(BaseModel):
-    id: str
+    orderId: int
+    clientOrderId: Optional[str]
     symbol: str
     type: str
     amount: float
+    filled: float
     price: float
     side: str
-    filled: float
-    placedAt: datetime
+    notionalValue: int
+    placedAt: int
 
 
 class AllOpenOrders(BaseModel):
