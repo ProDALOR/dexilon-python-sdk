@@ -58,7 +58,7 @@ class OrderInfo(BaseModel):
     price: float
     side: str
     notionalValue: int
-    placedAt: int
+    placedAt: datetime
 
 
 class AllOpenOrders(BaseModel):

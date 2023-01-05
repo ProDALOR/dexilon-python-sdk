@@ -82,7 +82,7 @@ class ApiMethods:
 
     @auth
     def cancel_order(self, symbol: str, client_order_id: str = None, order_id: str = None) -> Union[OrderEvent, Awaitable[OrderEvent]]:
-        return self.api.request('DELETE', '/orders', model=OrderEvent, data={
+        return self.api.request('DELETE', '/orders', model=OrderEvent, params={
             'symbol': symbol,
             **({'orderId': order_id} if order_id else {}),
             **({'clientOrderId': client_order_id} if client_order_id else {})
