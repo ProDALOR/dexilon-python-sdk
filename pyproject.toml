@@ -1,0 +1,12 @@
+[project]
+name = "dexilon_sdk"
+version = "0.0.1"
+dependencies = [
+    "pydantic >= 1.10.4",
+    "httpx >= 0.23.3",
+    "ecdsa >= 0.14.0",
+    "bech32 >= 1.1.0",
+    "mnemonic >= 0.19",
+    "hdwallets >= 0.1.0",
+    "web3 >= 5.29.0"
+]
