@@ -1,5 +1,7 @@
 from typing import Callable, Optional
 
+from web3 import Web3
+
 from .BaseClient import BaseClient
 from .SyncSession import SyncSession
 
@@ -10,7 +12,7 @@ from .cosmospy import Transaction
 
 class Client(BaseClient):
 
-    def __init__(self, private_key: Optional[str] = None) -> None:
+    def __init__(self, private_key: Optional[str] = None, mnemonic: Optional[str] = None) -> None:
 
         self.api = SyncSession(
             base_url=self.DEXILON_API_URL,
@@ -24,7 +26,13 @@ class Client(BaseClient):
             timeout=self.TIMEOUT
         )
 
-        super().__init__(private_key)
+        super().__init__(private_key, mnemonic)
+
+    def _rpc_connect(self) -> Web3:
+        for rpc in self.RPC_LIST:
+            w3 = Web3(Web3.HTTPProvider(rpc))
+            if w3.isConnected():
+                return w3
 
     def _generate_new_cosmos_address(self) -> str:
 

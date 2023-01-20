@@ -4,7 +4,7 @@
 """Generated protocol buffer code."""
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 from . import msg_pb2 as msg__pb2
-from . import cosmos_pb2 as cosmos__pb2
+from . import cosmos_pb2_old as cosmos__pb2
 from . import coin_pb2 as coin__pb2
 from . import gogo_pb2 as gogo__pb2
 from google.protobuf import descriptor as _descriptor

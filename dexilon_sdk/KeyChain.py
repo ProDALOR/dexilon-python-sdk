@@ -28,12 +28,15 @@ class KeyChain:
                  eth_chain_id: int,
                  dexilon_chain_id: str,
                  private_key: Optional[str] = None,
+                 mnemonic: Optional[str] = None
                  ) -> None:
 
-        if not private_key:
-            account = self.__generate_random_account()
-        else:
+        if private_key:
             account = self.__get_account_from_private_key(private_key)
+        elif mnemonic:
+            account = self.__get_account_from_mnemonic(mnemonic)
+        else:
+            account = self.__generate_random_account()
 
         self.eth_chain_id: int = eth_chain_id
         self.dexilon_chain_id: str = dexilon_chain_id
@@ -55,6 +58,10 @@ class KeyChain:
 
     def __get_account_from_private_key(self, private_key: str) -> LocalAccount:
         return Account.from_key(private_key)
+
+    def __get_account_from_mnemonic(self, mnemonic: str) -> LocalAccount:
+        Account.enable_unaudited_hdwallet_features()
+        return Account.from_mnemonic(mnemonic)
 
     def __bool__(self) -> bool:
         return bool(self.cosmos_address and self.__access_token)

@@ -22,7 +22,6 @@ class CosmosAddressMapping(BaseModel):
 
 
 class DexilonAccount(BaseModel):
-    type: Optional[str]
     address: Optional[str]
     account_number: Optional[int]
     sequence: Optional[int]
